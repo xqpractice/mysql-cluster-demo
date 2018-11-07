@@ -1,0 +1,65 @@
+version: '3'
+
+services:
+  mysql-manager1:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/manager1/mysql-cluster:/var/lib/mysql-cluster
+      - ./config/my-cluster.cnf:/etc/mysql-cluster.cnf
+    ports:
+      - "1186:1186"
+    command: ndb_mgmd
+
+  mysql-manager2:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/manager2/mysql-cluster:/var/lib/mysql-cluster
+      - ./config/my-cluster.cnf:/etc/mysql-cluster.cnf
+    ports:
+      - "1187:1186"
+    command: ndb_mgmd
+
+  mysql-node1:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/node1/mysql:/var/lib/mysql-node
+      - ./config/my.cnf:/etc/my.cnf
+    ports:
+      - "3316:3306"
+    command: ndbd
+
+  mysql-node2:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/node2/mysql:/var/lib/mysql-node
+      - ./config/my.cnf:/etc/my.cnf
+    ports:
+      - "3317:3306"
+    command: ndbd
+
+  mysql-server1:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/server1/mysql:/var/lib/mysql
+      - ./config/my.cnf:/etc/my.cnf
+    ports:
+      - "3326:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    command: mysqld
+
+  mysql-server2:
+    image: mysql/mysql-cluster:7.6.8
+    volumes:
+      - ./data/server2/mysql:/var/lib/mysql
+      - ./config/my.cnf:/etc/my.cnf
+    ports:
+      - "3327:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    command: mysqld
+
+networks:
+  default:
+    external:
+      name: local-network

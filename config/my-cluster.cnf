@@ -1,0 +1,33 @@
+[ndb_mgmd default]
+PortNumber=1186
+DataDir=/var/lib/mysql-cluster
+
+[ndbd default]
+NoOfReplicas=2
+DataMemory=80M
+IndexMemory=18M
+DataDir=/var/lib/mysql-node
+
+[ndb_mgmd]
+NodeId=1
+HostName=mysql-manager1
+
+[ndb_mgmd]
+NodeId=2
+HostName=mysql-manager2
+
+[ndbd]
+NodeId=3
+HostName=mysql-node1
+
+[ndbd]
+NodeId=4
+HostName=mysql-node2
+
+[mysqld]
+NodeId=5
+HostName=mysql-server1
+
+[mysqld]
+NodeId=6
+HostName=mysql-server2
