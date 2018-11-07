@@ -3,6 +3,7 @@ PortNumber=1186
 DataDir=/var/lib/mysql-cluster
 
 [ndbd default]
+ServerPort=2202
 NoOfReplicas=2
 DataMemory=80M
 IndexMemory=18M
