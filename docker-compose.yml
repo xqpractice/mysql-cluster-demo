@@ -22,8 +22,7 @@ services:
   mysql-node1:
     image: mysql/mysql-cluster:7.6.8
     volumes:
-      - ./data/node1/mysql:/var/lib/mysql-node
-      - ./config/my-cluster.cnf:/etc/mysql-cluster.cnf
+      - ./data/node1/mysql-node:/var/lib/mysql-node
       - ./config/my.cnf:/etc/my.cnf
     ports:
       - "13306:3306"
@@ -32,8 +31,7 @@ services:
   mysql-node2:
     image: mysql/mysql-cluster:7.6.8
     volumes:
-      - ./data/node2/mysql:/var/lib/mysql-node
-      - ./config/my-cluster.cnf:/etc/mysql-cluster.cnf
+      - ./data/node2/mysql-node:/var/lib/mysql-node
       - ./config/my.cnf:/etc/my.cnf
     ports:
       - "13307:3306"
